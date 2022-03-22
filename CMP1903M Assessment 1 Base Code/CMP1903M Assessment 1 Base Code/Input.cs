@@ -15,7 +15,7 @@ namespace CMP1903M_Assessment_1_Base_Code
         //Arguments: none
         //Returns: string
         //Gets text input from the keyboard
-        public string manualTextInput()
+        public string manualTextInput(string text)
         {
 
             return text;

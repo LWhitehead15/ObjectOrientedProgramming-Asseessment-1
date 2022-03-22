@@ -15,9 +15,17 @@ namespace CMP1903M_Assessment_1_Base_Code
             List<int> parameters = new List<int>();
 
             //Create 'Input' object
+            Input Input = new Input();
+
             //Get either manually entered text, or text from a file
+            Console.Write("Would you like to analyse entered text (enter 0) or text from a file (enter 1)?: ");
+            int choice = Console.ReadLine();
 
-
+            if choice == 0
+            {
+            Console.Write("Please enter the text for analysis: ");
+            string text = Input.manualTextInput(Console.ReadLine());
+            }
             //Create an 'Analyse' object
             //Pass the text input to the 'analyseText' method
 
