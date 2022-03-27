@@ -15,9 +15,9 @@ namespace CMP1903M_Assessment_1_Base_Code
         //Arguments: none
         //Returns: string
         //Gets text input from the keyboard
-        public string manualTextInput(string text)
+        public string manualTextInput()
         {
-
+            text = Console.ReadLine();
             return text;
         }
 
@@ -27,7 +27,14 @@ namespace CMP1903M_Assessment_1_Base_Code
         //Gets text input from a .txt file
         public string fileTextInput(string fileName)
         {
-
+            if (!Directory.Exists(fileName))
+            {
+                text = System.IO.File.ReadAllText(fileName);
+            }
+            else
+            {
+                text = "";
+            }
             return text;
         }
 
