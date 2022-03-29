@@ -14,16 +14,31 @@ namespace CMP1903M_Assessment_1_Base_Code
 
         public static void outputResult(List<int> output)
         {
-            Console.WriteLine("");
+            // Reviews highlighted unoptimised output design. Added whitespace Values.
+
+            Console.WriteLine();
             Console.WriteLine("Analysis results:");
             Console.WriteLine("------------------------------");
-            Console.WriteLine("Sentence count | " + output[0]);
-            Console.WriteLine("Vowel count | " + output[1]);
-            Console.WriteLine("Consonant count | " + output[2]);
-            Console.WriteLine("Uppercase letter count | " + output[3]);
-            Console.WriteLine("Lowercase letter count | " + output[4]);
-            Console.WriteLine("Letter count | " + output[5]);
+            Console.WriteLine("{0, -15} {1,0} {2,0}", "Sentence count", " | ", output[0]);
+            Console.WriteLine("{0, -15} {1,0} {2,0}", "Vowel count", " | ", output[1]);
+            Console.WriteLine("{0, -15} {1,0} {2,0}", "Consonant count", " | ", output[2]);
+            Console.WriteLine("{0, -15} {1,0} {2,0}", "Uppercase count", " | ", output[3]);
+            Console.WriteLine("{0, -15} {1,0} {2,0}", "Lowercase count", " | ", output[4]);
+            Console.WriteLine("{0, -15} {1,0} {2,0}", "Letter count", " | ", output[5]);
         }
 
+        // Outputs the frequency of each letter.
+        public static void outputLetters(IDictionary<string, int> frequency)
+        {   
+
+            // Add 65 onto the index of alphabetic character to relate to ascii
+            // of uppercase version of letter for output. Add 97 for lowercase
+            // version for search.
+
+            for (int i = 0; i < 26; i++)
+            {
+                Console.WriteLine("{0, -5} {1,0} {2,0}", Convert.ToChar(i + 65).ToString(), " | ", frequency[Convert.ToChar(i + 97).ToString()]);
+            }
+        }
     }
 }

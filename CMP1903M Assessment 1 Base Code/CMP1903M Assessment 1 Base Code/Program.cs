@@ -9,6 +9,7 @@ namespace CMP1903M_Assessment_1_Base_Code
 {
     class Program
     {
+        
         static void Main()
         {
 
@@ -16,45 +17,19 @@ namespace CMP1903M_Assessment_1_Base_Code
             //Local list of integers to hold the first five measurements of the text
             List<int> parameters = new List<int>();
 
-            //Create 'Input' object, valid integer and text string.
+            //Create 'Input' object, valid Boolean, text & choice string.
             Input Input = new Input();
-            int valid = 0;
+            bool valid = false;
             string text = "";
+            string choice = "";
 
-            while (valid == 0)
-            {
-                //Get either manually entered text, or text from a file
-                Console.WriteLine("Would you like to analyse entered text (enter 0) or text from a file (enter 1)?: ");
-                string choice = Console.ReadLine();
-            
-                if (choice == "0")
-                {
-                    valid = 1;
-                    Console.WriteLine("Please enter the text for analysis: ");
-                    text = Input.manualTextInput();
-                    if (text == "")
-                    {
-                        Console.WriteLine("No text was entered. Please try again...");
-                        valid = 0;
-                    }
-                }
-                else if (choice == "1")
-                {
-                    valid = 1;
-                    Console.WriteLine("Please enter the filepath for textfile analysis: ");
-                    text = Input.fileTextInput(Console.ReadLine());
-                    if (text == "")
-                    {
-                        Console.WriteLine("Text file is empty/path is invalid. Please try again...");
-                        valid = 0;
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Invalid text/choice entered, please try again...");
-                    valid = 0;
-                }
-            }
+            Console.WriteLine("Text Analyser by Liam Whitehead (ID: 25698752)");
+
+
+            //Get either manually entered text, or text from a file.
+            //The choice is programmed in the input class.
+            text = Input.ChooseEntry();
+
 
             //Create an 'Analyse' object
             //Pass the text input to the 'analyseText' method
@@ -64,13 +39,60 @@ namespace CMP1903M_Assessment_1_Base_Code
             //Report the results of the analysis
 
             report report = new report();
-
             report.outputResult(Analyse.analyseText(text));
 
 
-            //TO ADD: Get the frequency of individual letters?
+
+            //Get the frequency of individual letters.
+            // Reuse valid variable.
+            valid = false;
+
+            while (valid == false)
+            {
+                Console.WriteLine();
+                Console.WriteLine("Would you like to see the frequency of each letter? (Enter 0 for Yes) (Enter 1 for no): ");
+                choice = Console.ReadLine();
+
+                if (choice == "0")
+                {
+                    report.outputLetters(Analyse.LetterAnalysis(text));
+                    valid = true;
+                }
+                else if (choice == "1")
+                {
+                    valid = true;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input. Please try again...");
+                    valid = false;
+                }
+            }
 
 
+            // Ask the user if they want to rerun application.
+            valid = false;
+            while (valid == false)
+            {
+                Console.WriteLine("Would you like to rerun the application? (Enter 0 for yes) (Enter 1 for no):");
+                choice = Console.ReadLine();
+
+                if (choice == "0")
+                {
+                    Console.Clear();
+                    Main();
+                    Environment.Exit(0);
+                }
+                else if (choice == "1")
+                {
+                    Environment.Exit(0);
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input. Please try again...");
+                    valid = false;
+                }
+            }
         }
         
         
