@@ -23,7 +23,7 @@ namespace CMP1903M_Assessment_1_Base_Code
 				File.AppendAllText(path, string.Join(Environment.NewLine, words));
 			}
 
-			Console.WriteLine("Long words detected. A textfile can be found at (" + path + ") that includes all words longer than 7 letters in that input.");
+			Console.WriteLine("\n Long words detected. A textfile can be found at (" + path + ") \n that includes all words longer than 7 letters in that input.");
 		}
 	}
 }

@@ -46,7 +46,23 @@ namespace CMP1903M_Assessment_1_Base_Code
                 {
                     //If file is found, read all text within. Function automatically closes file at the end.
                     text = System.IO.File.ReadAllText(fileName);
+
+                    Console.WriteLine("");
+                    Console.WriteLine("This is the retrieved text for analysis:");
+
+                    // Displays contents with a limit of 100 characters per line
+                    string[] words = text.Split(" ");
+                    for (int i = 0; i < words.Length - 1; i++)
+                    {
+                        Console.Write(words[i] + " ");
+
+                        if (i % 11 == 0 && i > 0)
+                        {
+                            Console.WriteLine(words[i]);
+                        }
+                    }
                 }
+
                 //If not found, allow retry.
                 else
                 {
@@ -82,7 +98,7 @@ namespace CMP1903M_Assessment_1_Base_Code
                 if (choice == "0")
                 {
                     valid = true;
-                    Console.WriteLine("Please enter the text for analysis: ");
+                    Console.WriteLine("Please enter the text for analysis (use a * to end a line and begin a new one): ");
                     text = manualTextInput();
                     //If empty, allow retry.
                     if ((text == "") || (text == null))

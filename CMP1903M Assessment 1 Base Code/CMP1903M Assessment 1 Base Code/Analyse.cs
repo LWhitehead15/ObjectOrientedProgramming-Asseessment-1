@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace CMP1903M_Assessment_1_Base_Code
 {
+    // Abstract class (Abstraction)
     public class Analyse
     {
         //Handles the analysis of text
@@ -16,6 +17,7 @@ namespace CMP1903M_Assessment_1_Base_Code
         //Returns: list of integers
         //Calculates and returns an analysis of the text
 
+        // Abstract method (Abstraction)
         public List<int> analyseText(string input)
         {
             //List of integers to hold the first five measurements:
@@ -33,46 +35,52 @@ namespace CMP1903M_Assessment_1_Base_Code
                 values.Add(0);
             }
 
+
             // For each Regex count, First i define Regex Filter and create Regex object for filter.
             // Next, I create a MatchCollection object for the matches of the Regex filter from the input.
             // Then I Store the matches count into that count's list index in Values list.
+            // t.filter allows encapsulated property in other class to be used each time.
+
+            // Encapsulation using class object for filter.
+            FilterType t = new FilterType();
+
 
             // Sentence count
 
-            string sentences = @"[!?.]\s|[!.?]+";
-            Regex rxSentences = new Regex(sentences);
+            t.filter = @"[!?.]\s|[!.?]+";
+            Regex rxSentences = new Regex(t.filter);
             MatchCollection matchSentences = rxSentences.Matches(input);
             values[0] = matchSentences.Count;
 
 
             // Vowels count
 
-            string vowels = @"([aeiou]){1}";
-            Regex rxVowels = new Regex(vowels);
+            t.filter = @"([aeiou]){1}";
+            Regex rxVowels = new Regex(t.filter);
             MatchCollection matchVowels = rxVowels.Matches(input.ToLower());
             values[1] = matchVowels.Count;
 
 
             // Consonants count
 
-            string consonants = @"([bcdfghjklmnpqrstvwxyz]){1}";
-            Regex rxConsonants = new Regex(consonants);
+            t.filter = @"([bcdfghjklmnpqrstvwxyz]){1}";
+            Regex rxConsonants = new Regex(t.filter);
             MatchCollection matchConsonants = rxConsonants.Matches(input.ToLower());
             values[2] = matchConsonants.Count;
 
 
             // Uppercase letters count
 
-            string uppercase = @"([A-Z]{1})";
-            Regex rxUppercase = new Regex(uppercase);
+            t.filter = @"([A-Z]{1})";
+            Regex rxUppercase = new Regex(t.filter);
             MatchCollection matchUppercase = rxUppercase.Matches(input);
             values[3] = matchUppercase.Count;
 
 
             // Lowercase letters count
 
-            string lowercase = @"([a-z]{1})";
-            Regex rxLowercase = new Regex(lowercase);
+            t.filter = @"([a-z]{1})";
+            Regex rxLowercase = new Regex(t.filter);
             MatchCollection matchLowercase = rxLowercase.Matches(input);
             values[4] = matchLowercase.Count;
 
@@ -82,8 +90,8 @@ namespace CMP1903M_Assessment_1_Base_Code
 
             
             // Checks for words longer than 7 letters to write to a textfile.
-            string longWord = @"([A-Za-z]{7,})";
-            Regex rxLongWord = new Regex(longWord);
+            t.filter = @"([A-Za-z]{7,})";
+            Regex rxLongWord = new Regex(t.filter);
             MatchCollection matchLongWord = rxLongWord.Matches(input);
             List<string> temp = new List<string>();
             foreach (Match match in matchLongWord)
@@ -95,11 +103,11 @@ namespace CMP1903M_Assessment_1_Base_Code
             {
                 LongWords.WriteFile(temp);
             }
-
             return values;
         }
 
 
+        // Abstract Method (Abstraction)
         // Creates a dictionary to hold the frequency of letters.
 
         public IDictionary<string, int> LetterAnalysis(string input)
@@ -120,6 +128,25 @@ namespace CMP1903M_Assessment_1_Base_Code
             }
 
             return frequency;
+        }
+
+    }
+
+    // Encapsulation with properties
+    public class FilterType
+    {
+        public string filter;
+        public string Type
+        {
+            // Get and Set accessors allow filter to be read and write accessbile.
+            get
+            {
+                return filter;
+            }
+            set
+            {
+                filter = value;
+            }
         }
     }
 }
