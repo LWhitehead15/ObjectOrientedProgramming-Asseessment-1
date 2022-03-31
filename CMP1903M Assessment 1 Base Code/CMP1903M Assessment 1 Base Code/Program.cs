@@ -50,12 +50,12 @@ namespace CMP1903M_Assessment_1_Base_Code
             while (valid == false)
             {
                 Console.WriteLine();
-                Console.WriteLine("Would you like to see the frequency of each letter? (Enter 0 for Yes) (Enter 1 for no): ");
+                Console.WriteLine("Would you like to see the frequency of each character? (Enter 0 for Yes) (Enter 1 for no): ");
                 choice = Console.ReadLine();
 
                 if (choice == "0")
                 {
-                    report.outputLetters(Analyse.LetterAnalysis(text));
+                    report.outputFreq(Analyse.FreqAnalysis(text));
                     valid = true;
                 }
                 else if (choice == "1")

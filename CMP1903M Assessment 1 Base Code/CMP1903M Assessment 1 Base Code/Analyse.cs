@@ -110,14 +110,16 @@ namespace CMP1903M_Assessment_1_Base_Code
 
 
         // Abstract Method (Abstraction)
-        // Creates a dictionary to hold the frequency of letters.
+        // Creates a dictionary to hold the frequency of characters.
 
-        public IDictionary<string, int> LetterAnalysis(string input)
+        public IDictionary<string, int> FreqAnalysis(string input)
         {
             IDictionary<string, int> frequency = new Dictionary<string, int>();
 
-            // Retrieves the frequency of each letter. i is the index of the alphabetical
-            // letter. +97 is used to relate it to the letters lowercase ascii value.
+            // Retrieves the frequency of each character.
+
+            // i is the index of the Ascii +97 is used to start at the
+            // letters lowercase ascii value.
 
             for (int i = 0; i < 26; i++)
             {
@@ -126,9 +128,27 @@ namespace CMP1903M_Assessment_1_Base_Code
                 // Create a MatchCollection object for the matches of the Regex filter from the input
                 MatchCollection matchLetter = rxLetter.Matches(input.ToLower());
 
-                frequency.Add(Convert.ToChar(i + 97).ToString(), matchLetter.Count);
+                //Only added if there is any instances will it be added
+                if (matchLetter.Count > 0)
+                {
+                    frequency.Add(Convert.ToChar(i + 97).ToString(), matchLetter.Count);
+                }
             }
 
+            //For punctuation between ASCII 32 and 65
+            for (int i = 32; i < 65; i++)
+            {
+                string punct = @"([" + Convert.ToChar(i).ToString() + "]{1})";
+                Regex rxPunct = new Regex(punct);
+                // Create a MatchCollection object for the matches of the Regex filter from the input
+                MatchCollection matchPunct = rxPunct.Matches(input.ToLower());
+
+                //Only added if there is any instances will it be added
+                if (matchPunct.Count > 0)
+                {
+                    frequency.Add(Convert.ToChar(i).ToString(), matchPunct.Count);
+                }
+            }
             return frequency;
         }
 

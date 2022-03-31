@@ -27,17 +27,27 @@ namespace CMP1903M_Assessment_1_Base_Code
             Console.WriteLine("{0, -15} {1,0} {2,0}", "Letter count", " | ", output[5]);
         }
 
-        // Outputs the frequency of each letter.
-        public static void outputLetters(IDictionary<string, int> frequency)
-        {   
+        // Outputs the frequency of each character.
+        public static void outputFreq(IDictionary<string, int> frequency)
+        {
 
-            // Add 65 onto the index of alphabetic character to relate to ascii
-            // of uppercase version of letter for output. Add 97 for lowercase
-            // version for search.
-
+            // Add 65 onto the index to relate to ascii  of uppercase version of
+            // letter for output. Add 97 for lowercase version for search.
             for (int i = 0; i < 26; i++)
             {
-                Console.WriteLine("{0, -5} {1,0} {2,0}", Convert.ToChar(i + 65).ToString(), " | ", frequency[Convert.ToChar(i + 97).ToString()]);
+                if (frequency.ContainsKey(Convert.ToChar(i + 97).ToString()))
+                {
+                    Console.WriteLine("{0, -5} {1,0} {2,0}", Convert.ToChar(i + 65).ToString(), " | ", frequency[Convert.ToChar(i + 97).ToString()]);
+                }
+            }
+
+            //For punctuation between ASCII 32 and 65
+            for (int i = 32; i < 65; i++)
+            {
+                if (frequency.ContainsKey(Convert.ToChar(i).ToString()))
+                {
+                    Console.WriteLine("{0, -5} {1,0} {2,0}", Convert.ToChar(i).ToString(), " | ", frequency[Convert.ToChar(i).ToString()]);
+                }
             }
         }
     }
