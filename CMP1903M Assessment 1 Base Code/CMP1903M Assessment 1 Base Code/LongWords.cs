@@ -9,21 +9,23 @@ namespace CMP1903M_Assessment_1_Base_Code
 	{
 		public static void WriteFile(List<string> words)
 		{
-			// File path for textfile.
-			string path = @"C:\Users\liamt\Documents\LongWordOutput.txt";
 
-			// If it exists already, it will be deleted and remade.
-			if (System.IO.File.Exists(path))
+			// Retrieves a user inputted directory.
+			Console.WriteLine("\nLong words detected. Processing output file now...");
+			string path = Input.SetDirectory();
+
+			// If filepath exists already, it will be deleted and remade.
+			if (System.IO.File.Exists(path + "LongWords.txt"))
 			{
-				System.IO.File.Delete(path);
-				File.AppendAllText(path, string.Join(Environment.NewLine, words));
+				System.IO.File.Delete(path + "LongWords.txt");
+				File.AppendAllText((path + "LongWords.txt"), string.Join(Environment.NewLine, words));
 			}
-			else
+			else // Filepath will be made.
 			{
-				File.AppendAllText(path, string.Join(Environment.NewLine, words));
+				File.AppendAllText((path + "LongWords.txt"), string.Join(Environment.NewLine, words));
 			}
 
-			Console.WriteLine("\n Long words detected. A textfile can be found at (" + path + ") \n that includes all words longer than 7 letters in that input.");
+            Console.WriteLine("\nA textfile can be found at (" + path + "LongWords.txt) \n that includes " + words.Count + " words longer than 7 letters in that input.");
 		}
 	}
 }

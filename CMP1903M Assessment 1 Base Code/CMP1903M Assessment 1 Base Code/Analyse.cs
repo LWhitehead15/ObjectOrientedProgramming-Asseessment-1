@@ -47,6 +47,7 @@ namespace CMP1903M_Assessment_1_Base_Code
 
             // Sentence count
 
+            // t.filter shows Encapsualtion and keeping variable creation to a minimum.
             t.filter = @"[!?.]\s|[!.?]+";
             Regex rxSentences = new Regex(t.filter);
             MatchCollection matchSentences = rxSentences.Matches(input);
@@ -54,6 +55,7 @@ namespace CMP1903M_Assessment_1_Base_Code
 
 
             // Vowels count
+
 
             t.filter = @"([aeiou]){1}";
             Regex rxVowels = new Regex(t.filter);

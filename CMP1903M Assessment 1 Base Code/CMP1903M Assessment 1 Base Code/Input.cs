@@ -131,5 +131,44 @@ namespace CMP1903M_Assessment_1_Base_Code
 
         }
 
+        public static string SetDirectory()
+        {
+            // ask user where they'd like to put output file.
+
+            Console.WriteLine("Would you like text files stored in the programs directory or a custom one?: (enter 0 for same) (enter 1 for custom)");
+            string choice = Console.ReadLine();
+            bool valid = false;
+            string filepath = "";
+
+            while (valid == false)
+            {
+                if (choice == "0")
+                {
+                    filepath = (Directory.GetCurrentDirectory() + "\\"); // Will output to program bin folder
+                    valid = true;
+                }
+                else if (choice == "1") // Will check if directory chosen exists. Will repeat until a suitable option is reached.
+                {
+                    Console.WriteLine("Please enter the directory letter you would like to use:");
+                    filepath = Console.ReadLine().ToUpper();
+
+                    if (filepath.Length == 1 && filepath.All(char.IsLetter) && Directory.Exists(filepath + ":"))
+                    {
+                        filepath = filepath + ":\\";
+                        valid = true;
+                    } else
+                    {
+                        Console.WriteLine("Invalid input detected. Please try again....");
+                        valid = false;
+                    }
+                } else
+                {
+                    Console.WriteLine("Invalid choice. Please try again...");
+                    valid = false;
+                }
+            }
+            return filepath;
+        }
+
     }
 }
