@@ -1,0 +1,9 @@
+
+*Test Data:
+Sentences:	6
+Total Characters: 506
+Vowels: 189		
+Upper Case:	9
+Lower Case: 497
+
+*Doesn't include punctuation or whitespaces between words.
